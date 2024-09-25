@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - network-digital-wallet
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env.production
+    ports:
+      - "5001:5001"
+      - "5002:5002"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - network-digital-wallet
+
+networks:
+  network-digital-wallet:
+    driver: bridge

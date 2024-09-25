@@ -1,0 +1,31 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 5001
+  },
+  "serverRest": {
+    "host": "localhost",
+    "port": 5002
+  },
+  "database": {
+    "mysql": {
+      "host": "localhost",
+      "port": 3306,
+      "username": "root",
+      "password": "1234",
+      "name": "billetera_virtual"
+    }
+  },
+  "jwt": {
+    "secret": "DkRYBtGCPWQrv/fK8MEmqzuwHF3JhpaUT5d2V6j9",
+    "expiresIn": "1h"
+  },
+  "swagger": {
+    "title": "Event Management API",
+    "version": "1.0.0"
+  },
+  "logging": {
+    "level": "debug",
+    "format": "%date% %pid% %level% %message%"
+  }
+}
