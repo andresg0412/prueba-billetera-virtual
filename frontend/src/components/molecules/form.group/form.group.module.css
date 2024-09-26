@@ -1,0 +1,6 @@
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 4px;
+    width: 100%;
+}

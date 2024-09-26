@@ -1,4 +1,4 @@
-// File: E:\Desarrollos_GitHub\prueba-epayco\billetera-virtual\frontend\src\app\layout.js
+// File: E:\Desarrollos_GitHub\prueba2-epayco\billetera-virtual\frontend\src\app\layout.js
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
