@@ -14,4 +14,7 @@ const walletController = new WalletController(walletServiceUseCase);
 router.post('/deposit', (req, res) => {
     walletController.depositMoney(req, res);
 });
+router.post('/payment', (req, res) => {
+    walletController.makePayment(req, res);
+});
 module.exports = router

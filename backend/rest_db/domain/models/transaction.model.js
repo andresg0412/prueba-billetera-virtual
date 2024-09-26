@@ -22,18 +22,21 @@ const Transaction = sequelize.define(
                 key: 'id',
             },
         },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
+        status: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
+        sessionId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     }, {
-    timestamps: false,
+    tableName: 'transactions',
+    timestamps: true,
 });
 
 module.exports = Transaction;

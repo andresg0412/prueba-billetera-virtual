@@ -1,7 +1,7 @@
-const sequelize = require('./infrastructure/database/sequelize-config');
-const Customer = require('./domain/models/customer.model');
-const Wallet = require('./domain/models/wallet.model');
-const Transaction = require('./domain/models/transaction.model');
+const sequelize = require('./rest_db/infrastructure/database/sequelize-config');
+const Customer = require('./rest_db/domain/models/customer.model');
+const Wallet = require('./rest_db/domain/models/wallet.model');
+const Transaction = require('./rest_db/domain/models/transaction.model');
 
 Customer.hasOne(Wallet, {
     foreignKey: 'customerId',
