@@ -7,12 +7,12 @@ class CustomerServiceUseCase {
     async getAllCustomers() {
         try {
             const customers = await this.customerRepository.getAllCustomers();
-            if (!customers) {
+            if (customers === null) {
                 return createResponse(404, false, 'No hay usuarios');
             }
             return createResponse(200, true, 'Usuarios encontrados', customers);
         } catch (error) {
-            return createResponse(500, false, 'Error al obtener usuarios');
+            return createResponse(500, false, 'Error al obtener usuarios', error);
         }
     }
     async createCustomer({ document, name, email, phone }) {

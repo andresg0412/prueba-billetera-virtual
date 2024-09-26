@@ -34,6 +34,10 @@ const Transaction = sequelize.define(
             type: DataTypes.STRING,
             allowNull: true,
         },
+        tokenExpiresAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     }, {
     tableName: 'transactions',
     timestamps: true,

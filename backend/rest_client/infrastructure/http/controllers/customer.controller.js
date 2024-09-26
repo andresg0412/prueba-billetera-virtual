@@ -30,8 +30,12 @@ class CustomerController {
             const response = await axios.get(`${baseUrl}/api/customers`);
             return res.status(response.status).json(response.data);
         } catch (error) {
-            console.error('Error en getAllCustomers:', error);
-            return res.status(500).json({ message: 'Error al obtener usuarios use controller' });
+            if (error.response) {
+                return res.status(error.response.status).json(error.response.data);
+            } else {
+                const errorResponse = createResponse(500, false, 'Error al obtener usuarios');
+                return res.status(500).json(errorResponse);
+            }
         }
     }
 

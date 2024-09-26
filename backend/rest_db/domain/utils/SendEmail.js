@@ -10,7 +10,6 @@ const transporter = nodemailer.createTransport({
 class SendEmail {
 
     static async sendEmail({email, subject, text}) {
-        console.log(email, subject, text)
         const mailOptions = {
             from: 'andresgp682@gmail',
             to: email,

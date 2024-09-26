@@ -11,7 +11,7 @@ class CustomerRepository {
         try {
             const rows = await this.customer.findAll();
             if (!rows || rows.length === 0) {
-                return [];
+                return null;
             };
             return rows;
         } catch (error) {

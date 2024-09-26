@@ -33,24 +33,22 @@ class WalletServiceUseCase {
             if (wallet.balance < cost_to_pay) {
                 return createResponse(400, false, 'Saldo insuficiente');
             }
-            //crear token de 6 digitos
             const token = GenerateToken.generateToken();
 
-            //id de sesion
             const sessionId = GenerateSessionId.generate();
 
-            //guardar en tabla transaccion
             const transaction = await this.walletRepository.createTransaction({
                 walletId: wallet.id,
                 amount: cost_to_pay,
                 status: 'PENDING',
                 sessionId: sessionId,
-                token: token.token
+                token: token.token,
+                tokenExpiresAt: token.expiresAt
             });
             if (transaction === null) {
                 return createResponse(400, false, 'Error al realizar transacción');
             }
-            //si ok, enviar email
+
             const enviarEmail = await SendEmail.sendEmail({
                 email: wallet.customerEmail,
                 subject: 'Confirmación de compra',
@@ -59,14 +57,62 @@ class WalletServiceUseCase {
             if (enviarEmail === null) {
                 return createResponse(400, false, 'Error al enviar email');
             }
-            //si ok, enviar respuesta con sesion id
-
             return createResponse(200, true, 'Transacción creada', transaction);
         } catch (error) {
             throw createResponse(500, false, 'Error al realizar transacción');
         }
     }
 
+    async confirmPayment({ document, phone, token, sessionId }) {
+        try {
+            const wallet = await this.walletRepository.findCustomerWallet({ document, phone });
+            if (wallet === null) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+
+            const transaction = await this.walletRepository.getTransactionWithToken({ walletId: wallet.id, token: token });
+            if (transaction === null) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+
+            if (transaction.dataValues.sessionId !== sessionId) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+
+            if (transaction.dataValues.status === 'CONFIRMED') {
+                return createResponse(400, false, 'Error en la petición, la transacción ya fue confirmada');
+            }
+
+            if (new Date(transaction.dataValues.tokenExpiresAt).getTime() < Date.now()) {
+                return createResponse(400, false, 'Error en la petición, el token ha expirado');
+            }
+
+            const transactionConfirmed = await this.walletRepository.transaccionConfirmed({ wallet, amount: transaction.amount });
+            if (transactionConfirmed === null) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+
+            const updatedTransaction = await this.walletRepository.updateTransaction({ transactionId: transaction.id, status: 'CONFIRMED' });
+            if (updatedTransaction === null) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+
+            const enviarEmail = await SendEmail.sendEmail({
+                email: wallet.customerEmail,
+                subject: 'Confirmación de transacción',
+                text: 'Transacción confirmada'
+            });
+            if (enviarEmail === null) {
+                return createResponse(400, false, 'Error al enviar email');
+            }
+
+            transaction.status = 'CONFIRMED';
+
+            return createResponse(200, true, 'Transacción confirmada', transaction);
+        } catch (error) {
+            throw createResponse(500, false, 'Error al confirmar transacción');
+        }
+    }
 }
 
 module.exports = WalletServiceUseCase;

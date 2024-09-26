@@ -17,4 +17,7 @@ router.post('/deposit', (req, res) => {
 router.post('/payment', (req, res) => {
     walletController.makePayment(req, res);
 });
+router.post('/confirmPayment', (req, res) => {
+    walletController.confirmPayment(req, res);
+});
 module.exports = router
