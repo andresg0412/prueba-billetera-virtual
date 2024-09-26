@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const serverConfigRest = require('../../resources/application.json').serverRest;
 const routesCustomer = require('./http/routes/customer.routes');
+const routesWallet = require('./http/routes/wallet.routes');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 require('dotenv').config();
@@ -32,6 +33,9 @@ appRest.use(express.json());
 
 //CUSTOMERS
 appRest.use('/api', routesCustomer);
+
+//WALLET
+appRest.use('/api', routesWallet);
 
 
 //DOCUMENTACION SWAGGER

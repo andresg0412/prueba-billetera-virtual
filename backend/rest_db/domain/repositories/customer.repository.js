@@ -1,5 +1,6 @@
 const Customer = require('../models/customer.model');
 const Wallet = require('../models/wallet.model');
+const { createResponse } = require('../../../resources/utils/response.util');
 
 class CustomerRepository {
     constructor(sequelize) {
@@ -14,8 +15,7 @@ class CustomerRepository {
             };
             return rows;
         } catch (error) {
-            console.error('Error en getAllCustomers:', error);
-            throw { status: 500, body: { message: 'Error al obtener usuarios repository' } };
+            throw createResponse(500, false, 'Error al obtener usuarios');
         }
     }
     async getCustomerById(id) {
@@ -23,7 +23,7 @@ class CustomerRepository {
             const rows = await this.customer.findByPk(id);
             return rows;
         } catch (error) {
-            throw error;
+            throw createResponse(500, false, 'Error al obtener usuario');
         }
     }
     async createCustomer(customer) {
@@ -37,10 +37,10 @@ class CustomerRepository {
             return customercreate;
         } catch (error) {
             if (error.code === 'ER_DUP_ENTRY') {
-                throw { status: 409, body: { message: 'Usuario ya existe' } };
+                throw createResponse(409, false, 'Usuario ya existe');
             }
 
-            throw error;
+            throw createResponse(500, false, 'Error al crear usuario');
         }
     }
 
@@ -48,12 +48,12 @@ class CustomerRepository {
         try {
             const customer = await this.customer.findByPk(id);
             if (!customer) {
-                throw { status: 404, body: { message: 'No se encontro el usuario' } };
+                return null;
             }
             const wallet = await Wallet.create({ customerId: id });
             return wallet;
         } catch (error) {
-            throw error;
+            throw createResponse(500, false, 'Error al crear wallet de usuario');
         }
     }
 }

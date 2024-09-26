@@ -1,4 +1,5 @@
 const ValidationsUtils = require('../../../../domain/utils/ValidationsUtils');
+const { createResponse } = require('../../../../../resources/utils/response.util');
 class CustomerController {
     constructor(customerServiceUseCase) {
         this.customerServiceUseCase = customerServiceUseCase;
@@ -10,22 +11,26 @@ class CustomerController {
             const validationResult = await ValidationsUtils.validateRequiredFields({ ...req.body }, requiredFields);
 
             if (validationResult !== null) {
-                throw { status: 400, body: { message: validationResult } };
+                const errorResponse = createResponse(400, false, validationResult);
+                return res.status(400).json(errorResponse);
             }
             const result = await this.customerServiceUseCase.createCustomer({ document, name, email, phone });
-            res.status(result.status).json(result.body);
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
         } catch (error) {
-            res.status(error.status).json(error.body);
+            const errorResponse = createResponse(error.status || 500, false, error.message, null, error);
+            return res.status(error.status || 500).json(errorResponse);
         }
     }
 
     async getAllCustomers(req, res) {
         try {
             const result = await this.customerServiceUseCase.getAllCustomers();
-            res.status(result.status).json(result.body);
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
         } catch (error) {
-            console.error('Error en getAllCustomers:', error);
-            res.status(500).json({ message: 'Error al obtener usuarios use controller' });
+            const errorResponse = createResponse(error.status || 500, false, error.message, null, error);
+            return res.status(500).json(errorResponse);
         }
     }
 
@@ -33,10 +38,11 @@ class CustomerController {
         try {
             const { id } = req.params;
             const result = await this.customerServiceUseCase.getCustomerById(id);
-            res.status(result.status).json(result.body);
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
         } catch (error) {
-            console.error('Error en getCustomerById:', error);
-            res.status(500).json({ message: 'Error al obtener usuario use controller' });
+            const errorResponse = createResponse(error.status || 500, false, error.message, null, error);
+            return res.status(500).json(errorResponse);
         }
     }
 }

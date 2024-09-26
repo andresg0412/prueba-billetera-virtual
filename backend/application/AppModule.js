@@ -17,11 +17,9 @@ class AppModule {
         try {
             const orderedModules = await this.orderModulesByDependencies();
 
-            console.log(orderedModules);
             for (let i = 0; i < orderedModules.length; i++) {
                 if (orderedModules[i]) {
                     const module = orderedModules[i];
-                    console.log(`Starting module ${module}`);
                     if (typeof module.start === 'function') {
                         await module.start();
                     } else {

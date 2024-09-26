@@ -1,3 +1,5 @@
+const { createResponse } = require('../../../resources/utils/response.util');
+
 class CustomerServiceUseCase {
     constructor(customerRepository) {
         this.customerRepository = customerRepository;
@@ -6,48 +8,41 @@ class CustomerServiceUseCase {
         try {
             const customers = await this.customerRepository.getAllCustomers();
             if (!customers) {
-                return { status: 404, body: { message: 'No se encontraron usuarios' } };
+                return createResponse(404, false, 'No hay usuarios');
             }
-            return { status: 200, body: customers };
+            return createResponse(200, true, 'Usuarios encontrados', customers);
         } catch (error) {
-            return { status: 500, body: { message: 'Error al obtener usuarios use case' } };
+            return createResponse(500, false, 'Error al obtener usuarios');
         }
     }
     async createCustomer({ document, name, email, phone }) {
         try {
             const customer = await this.customerRepository.createCustomer({ document, name, email, phone });
             if (customer === null) {
-                return { status: 409, body: { message: 'Usuario ya existe' } };
+                return createResponse(409, false, 'Usuario ya existe');
             }
             const wallet = await this.customerRepository.createWalletOfCustomer(customer.id);
             if (wallet === null) {
-                return { status: 500, body: { message: 'Error al crear wallet' } };
+                return createResponse(500, false, 'Error al crear wallet de usuario');
             }
-            return { status: 200, body: { message: 'Usuario y Wallet creados con éxito'} };
+            return createResponse(200, true, 'Usuario creado', customer);
         } catch (error) {
-            throw { status: 500, body: { message: 'Error al crear usuario' } };
+            return createResponse(500, false, 'Error al crear usuario');
         }
     }
-    //updateCustomer({ id, document, name, email, celular }) {
-    //    return Customer.update({ id, document, name, email, celular });
-    //}
-
-    //deleteCustomer(id) {
-    //    return Customer.delete(id);
-    //}
 
     async getCustomerById(id) {
         try {
             const customer = await this.customerRepository.getCustomerById(id);
-            return { status: 200, body: customer };
+            if (!customer) {
+                return createResponse(404, false, 'Usuario no encontrado');
+            }
+            return createResponse(200, true, 'Usuario encontrado', customer);
         } catch (error) {
-            return { status: 500, body: { message: 'Error al obtener el usuario' } };
+            return createResponse(500, false, 'Error al obtener usuario');
         }
     }
 
-    //getCustomerEvents(id) {
-    //    return Customer.getEvents(id);
-    //}
 }
 
 module.exports = CustomerServiceUseCase;

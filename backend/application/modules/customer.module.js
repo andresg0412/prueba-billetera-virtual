@@ -14,7 +14,6 @@ class CustomerModule{
             this.CustomerRepository = new CustomerRepository();
             this.CustomerServiceUseCase = new CustomerServiceUseCase(this.CustomerRepository);
             this.CustomerController = new CustomerController(this.CustomerServiceUseCase);
-            console.log('Modulo Customer iniciado');
         } catch (error) {
             console.error(error);
             

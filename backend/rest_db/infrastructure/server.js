@@ -3,6 +3,7 @@ const cors = require('cors');
 const AppModule = require('../../application/AppModule');
 const serverConfig = require('../../resources/application.json').server;
 const routesCustomer = require('./adapters/http/routes/customer.routes');
+const routesWallet = require('./adapters/http/routes/wallet.routes');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 require('dotenv').config();
@@ -35,6 +36,8 @@ app.use(express.json());
 //CUSTOMERS
 app.use('/api', routesCustomer);
 
+//WALLET
+app.use('/api', routesWallet);
 
 //DOCUMENTACION SWAGGER
 const swaggerDocument = YAML.load('./swagger.yml');

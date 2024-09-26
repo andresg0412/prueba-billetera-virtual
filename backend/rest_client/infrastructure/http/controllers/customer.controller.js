@@ -1,6 +1,7 @@
 const axios = require('axios');
 const port = require('../../../../resources/application.json').server.port;
 const baseUrl = `http://localhost:${port}`;
+const { createResponse } = require('../../../../resources/utils/response.util');
 class CustomerController {
     constructor(customerServiceUseCase) {
         this.customerServiceUseCase = customerServiceUseCase;
@@ -8,16 +9,18 @@ class CustomerController {
     async createCustomer(req, res) {
         try {
             if (!req.body) {
-                res.status(400).json({ message: 'Body is required' });
+                const errorResponse = createResponse(400, false, 'Body es requerido');
+                return res.status(400).json(errorResponse);
                 return;
             }
             const response = await axios.post(`${baseUrl}/api/customer`, req.body);
-            res.status(response.status).json(response.data);
+            return res.status(response.status).json(response.data);
         } catch (error) {
             if (error.response) {
-                res.status(error.response.status).json(error.response.data);
+                return res.status(error.response.status).json(error.response.data);
             } else {
-                res.status(500).json({ message: 'Error al crear usuario use controller' });
+                const errorResponse = createResponse(500, false, 'Error al crear usuario');
+                return res.status(500).json(errorResponse);
             }
         }
     }
@@ -25,20 +28,20 @@ class CustomerController {
     async getAllCustomers(req, res) {
         try {
             const response = await axios.get(`${baseUrl}/api/customers`);
-            res.status(response.status).json(response.data);
+            return res.status(response.status).json(response.data);
         } catch (error) {
             console.error('Error en getAllCustomers:', error);
-            res.status(500).json({ message: 'Error al obtener usuarios use controller' });
+            return res.status(500).json({ message: 'Error al obtener usuarios use controller' });
         }
     }
 
     async getCustomerById(req, res) {
         try {
             const response = await axios.get(`${baseUrl}/api/customer/${req.params.id}`);
-            res.status(response.status).json(response.data);
+            return res.status(response.status).json(response.data);
         } catch (error) {
             console.error('Error en getCustomerById:', error);
-            res.status(500).json({ message: 'Error al obtener usuario use controller' });
+            return res.status(500).json({ message: 'Error al obtener usuario use controller' });
         }
     }
 }
