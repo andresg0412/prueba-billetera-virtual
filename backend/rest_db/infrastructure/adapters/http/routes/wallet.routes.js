@@ -20,4 +20,7 @@ router.post('/payment', (req, res) => {
 router.post('/confirmPayment', (req, res) => {
     walletController.confirmPayment(req, res);
 });
+router.get('/balance/:document/:phone', (req, res) => {
+    walletController.getBalance(req, res);
+})
 module.exports = router

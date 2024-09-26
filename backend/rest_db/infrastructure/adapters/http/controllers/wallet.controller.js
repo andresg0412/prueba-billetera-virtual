@@ -42,8 +42,9 @@ class WalletController {
                 const errorResponse = createResponse(400, false, validationResult);
                 return res.status(400).json(errorResponse);
             }
-            const response = await this.walletServiceUseCase.makePayment({ document, phone, cost_to_pay });
-            return res.status(response.status).json(response.data);
+            const result = await this.walletServiceUseCase.makePayment({ document, phone, cost_to_pay });
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
         } catch (error) {
             if (error.response) {
                 return res.status(error.response.status).json(error.response.data);
@@ -70,12 +71,43 @@ class WalletController {
                 return res.status(400).json(errorResponse);
             }
 
-            const response = await this.walletServiceUseCase.confirmPayment({ token, sessionId, document, phone });
-            if (response.data === null) {
+            const result = await this.walletServiceUseCase.confirmPayment({ token, sessionId, document, phone });
+            if (result.data === null) {
                 const errorResponse = createResponse(response.status, false, response.message);
-                return res.status(response.status).json(errorResponse);
+                return res.status(result.status).json(errorResponse);
             }
-            return res.status(response.status).json(response);
+
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
+        } catch (error) {
+            if (error.response) {
+                return res.status(error.response.status).json(error.response.data);
+            } else {
+                const errorResponse = createResponse(500, false, 'Error en el pago');
+                return res.status(500).json(errorResponse);
+            }
+        }
+    }
+
+    async getBalance(req, res) {
+        try {
+            const { document } = req.params;
+            const { phone } = req.params;
+            if (!document || !phone) {
+                const errorResponse = createResponse(400, false, 'Error en la petición');
+                return res.status(400).json(errorResponse);
+            }
+
+            const requiredFields = ['document', 'phone'];
+            const validationResult = await ValidationsUtils.validateRequiredFields({ document, phone }, requiredFields);
+            if (validationResult !== null) {
+                const errorResponse = createResponse(400, false, validationResult);
+                return res.status(400).json(errorResponse);
+            }
+            
+            const result = await this.walletServiceUseCase.getBalance({document, phone});
+            const response = createResponse(result.status, true, result.message, result.data);
+            return res.status(result.status).json(response);
         } catch (error) {
             if (error.response) {
                 return res.status(error.response.status).json(error.response.data);
@@ -86,5 +118,4 @@ class WalletController {
         }
     }
 }
-
 module.exports = WalletController;

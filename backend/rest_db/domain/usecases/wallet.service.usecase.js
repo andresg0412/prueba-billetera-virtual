@@ -113,6 +113,18 @@ class WalletServiceUseCase {
             throw createResponse(500, false, 'Error al confirmar transacción');
         }
     }
+
+    async getBalance({ document, phone }) {
+        try {
+            const wallet = await this.walletRepository.findCustomerWallet({ document, phone });
+            if (wallet === null) {
+                return createResponse(400, false, 'Error en la petición');
+            }
+            return createResponse(200, true, 'Dinero disponible', { balance: wallet.balance });
+        } catch (error) {
+            throw createResponse(500, false, 'Error al obtener billetera');
+        }
+    }
 }
 
 module.exports = WalletServiceUseCase;
