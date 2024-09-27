@@ -1,9 +1,9 @@
 'use client';
-import RegisterTemplate from "@/components/templates/register/register.template";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import RegisterTemplate from '@/components/templates/register/register.template';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
 export default function Login() {
     const [error, setError] = useState('');

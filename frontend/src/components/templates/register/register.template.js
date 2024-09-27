@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/organisms/registerForm/register.form";
+import RegisterForm from '@/components/organisms/registerForm/register.form';
 function RegisterTemplate({
     handleSubmit,
     handleGoToLogin,

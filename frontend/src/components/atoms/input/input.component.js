@@ -1,5 +1,5 @@
 
-import styles from "./input.module.css";
+import styles from './input.module.css';
 function Input ({ children, ...props }) {
     return (
         <input

@@ -33,9 +33,22 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/atoms/button/button.module.css ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************/
 .button_button__V_0OC {
-    background-color: #FFFFFF;
+    background-color: #0045db;
     border: none;
-    color: #4b03a3;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 16px;
+    cursor: pointer;
+}
+.button_deposit__weQ_C{
+    background-color: #4b03a3;
+    border: none;
+    color: #FFFFFF;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -53,7 +66,7 @@
     font-size: 36px;
     line-height: 56px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .text_titulo3__Hq2gt{
@@ -63,12 +76,66 @@
     color: #000000;
     text-align: center;
 }
+
+.text_titulo4___SGdQ{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #252525;
+    text-align: center;
+}
 .text_price__fj6JN{
     font-size: 24px;
     line-height: 36px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #000000;
     text-align: center;
+}
+.text_text__nEn66{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+}
+.text_price__fj6JN{
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 600;
+    color: #003b7e;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/organisms/alertModal/alert.modal.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+.alert_modal_container__NghdF{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    max-width: 500px;
+    width: 80%;
+    min-height: 350px;
+    height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.alert_modal_aceptar__5hy12{
+    background-color: #0045db;
+    border: none;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-top: 16px;
 }
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/organisms/loginForm/login.form.module.css ***!
@@ -79,6 +146,18 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+.login_form_alertModal__Iauua{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/organisms/header/header.module.css ***!
@@ -96,3 +175,76 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/molecules/saldo/saldo.module.css ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************/
 
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/molecules/depositGroup/deposit.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+.deposit_input__d1WTL{
+    width: 100%;
+    height: 48px;
+    border: 1px solid #9c9c9c;
+    border-radius: 16px;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.deposit_cancel__eFFDb{
+    background-color: #dfdfdf;
+    border: none;
+    color: #303030;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+}
+.deposit_close__vx8Tv{
+    background-color: transparent;
+    border: none;
+    color: #030303;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/organisms/depositModal/deposit.modal.module.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+.deposit_modal_container___Bsdy{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    max-width: 500px;
+    width: 80%;
+    min-height: 350px;
+    height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/templates/dashboard/dashboard.template.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+.dashboard_template_containerModal__D1cIQ{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+}

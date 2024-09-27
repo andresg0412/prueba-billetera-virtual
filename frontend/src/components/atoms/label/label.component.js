@@ -1,4 +1,4 @@
-import styles from "./label.module.css";
+import styles from './label.module.css';
 function Label ({ children, ...props }) {
     return (
         <label

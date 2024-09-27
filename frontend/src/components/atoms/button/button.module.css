@@ -1,7 +1,20 @@
 .button {
-    background-color: #FFFFFF;
+    background-color: #0045db;
     border: none;
-    color: #4b03a3;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 16px;
+    cursor: pointer;
+}
+.deposit{
+    background-color: #4b03a3;
+    border: none;
+    color: #FFFFFF;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;

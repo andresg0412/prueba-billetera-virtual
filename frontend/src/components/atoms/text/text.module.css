@@ -2,7 +2,7 @@
     font-size: 36px;
     line-height: 56px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .titulo3{
@@ -12,10 +12,31 @@
     color: #000000;
     text-align: center;
 }
+
+.titulo4{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #252525;
+    text-align: center;
+}
 .price{
     font-size: 24px;
     line-height: 36px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #000000;
     text-align: center;
+}
+.text{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+}
+.price{
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 600;
+    color: #003b7e;
 }

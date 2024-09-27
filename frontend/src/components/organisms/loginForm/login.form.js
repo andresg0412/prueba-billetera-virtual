@@ -1,11 +1,14 @@
-import FormGroup from "@/components/molecules/form.group/form.group";
-import Button from "@/components/atoms/button/button.component";
-import Titulo1 from "@/components/atoms/text/titulo1.component";
-import { useState } from "react";
-import styles from "./login.form.module.css";
+import FormGroup from '@/components/molecules/form.group/form.group';
+import Button from '@/components/atoms/button/button.component';
+import Titulo1 from '@/components/atoms/text/titulo1.component';
+import AlertModal from '../alertModal/alert.modal';
+import { useState } from 'react';
+import styles from './login.form.module.css';
 function LoginForm({
     handleSubmit,
     handleGoToRegister,
+    isAlertModal,
+    setIsAlertModal,
     error
 }) {
 
@@ -42,6 +45,14 @@ function LoginForm({
                 {error && <p className="text-red-500">{error}</p>}
                 <Button onClick={handleButtonGoToRegister}>Crear cuenta</Button>
             </div>
+            {isAlertModal ? (
+                <div className={styles.alertModal}>
+                    <AlertModal
+                        text="Credenciales incorrectas"
+                        setIsAlertModal={setIsAlertModal}
+                    />
+                </div>
+            ): null}
 
         </>
     )
