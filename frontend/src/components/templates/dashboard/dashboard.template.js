@@ -4,9 +4,12 @@ import Button from '@/components/atoms/button/button.component';
 import DepositModal from '@/components/organisms/depositModal/deposit.modal';
 import AlertModal from '@/components/organisms/alertModal/alert.modal';
 import { useRouter } from 'next/navigation';
+import DashboardOrganism from '@/components/organisms/dashboard/dashboard.organism';
+import axios from 'axios';
 import styles from './dashboard.template.module.css';
 function DashboardTemplate({
-    balance
+    balance,
+    handleRefreshBalance
 }) {
     const [depositModal, setDepositModal] = useState(false);
     const [isAlertModal, setIsAlertModal] = useState(false);
@@ -15,9 +18,13 @@ function DashboardTemplate({
     const handleDepositModal = () => {
         setDepositModal(!depositModal);
     }
-    const handleConfirmDeposit = () => {
-        setDepositModal(!depositModal);
-        setIsAlertModal(!isAlertModal);
+    const handleConfirmDeposit = async (amount) => {
+        const response = await axios.post('/api/deposit', { amount });
+        if (response.data.success === true) {
+            handleRefreshBalance();
+            setDepositModal(!depositModal);
+            setIsAlertModal(!isAlertModal);
+        }
     }
 
     const handleMarketplace = () => {
@@ -27,18 +34,11 @@ function DashboardTemplate({
     return (
         <>
             <div>
-                <Saldo
+                <DashboardOrganism
                     balance={balance}
+                    handleDepositModal={handleDepositModal}
+                    handleMarketplace={handleMarketplace}
                 />
-                <Button>Transferir</Button>
-                <Button
-                    onClick={() => handleDepositModal()}
-                >Depositar</Button>
-                <Button>Retirar</Button>
-                <Button
-                    onClick={() => handleMarketplace()}>
-                    Marketplace
-                </Button>
             </div>
             {depositModal ? (
                 <div className={styles.containerModal}>

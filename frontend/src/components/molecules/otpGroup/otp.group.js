@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
 import Titulo4 from '@/components/atoms/text/titulo4.atoms';
 import styles from './otp.group.module.css';
 import Button from '@/components/atoms/button/button.component';
 import Input from '@/components/atoms/input/input.component';
-function OtpGroup({ text, handleConfirmOtp, setIsPayModalVisible }) {
 
+function OtpGroup({ text, handleConfirmOtp, setIsPayModalVisible }) {
+    const [valueOtp, setValueOtp] = useState('');
     return (
         <>
             <div className={styles.otpGroup}>
@@ -11,10 +13,11 @@ function OtpGroup({ text, handleConfirmOtp, setIsPayModalVisible }) {
                 <Input
                     type="text"
                     placeholder="123456"
-                    value="123456"
+                    value={valueOtp}
+                    onChange={(e) => setValueOtp(e.target.value)}
                 />
                 <Button
-                    onClick={() => handleConfirmOtp()}>Confirmar</Button>
+                    onClick={() => handleConfirmOtp(valueOtp)}>Confirmar</Button>
                 <Button
                     className={styles.cancel}
                     onClick={() => setIsPayModalVisible(false)}>

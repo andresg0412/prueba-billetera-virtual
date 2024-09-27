@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/organisms/header/header';
 import MarketplaceTemplate from '@/components/templates/marketplace/marketplace.template';
+import styles from './page.module.css';
 import axios from 'axios';
 export default function Marketplace() {
     const [name, setName] = useState('Andres');
@@ -18,12 +19,14 @@ export default function Marketplace() {
     }, []);
     return (
         <>
-            <Header
-                name={name}
-            />
-            <MarketplaceTemplate
-                products={products}
-            />
+            <main className={styles.mainLogin}>
+                <Header
+                    name={name}
+                />
+                <MarketplaceTemplate
+                    products={products}
+                />
+            </main>
         </>
     )
 }

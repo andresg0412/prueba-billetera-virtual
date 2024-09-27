@@ -43,7 +43,7 @@ function LoginForm({
                 />
                 <Button onClick={handleClick}>Entrar</Button>
                 {error && <p className="text-red-500">{error}</p>}
-                <Button onClick={handleButtonGoToRegister}>Crear cuenta</Button>
+                <Button onClick={handleButtonGoToRegister} className={styles.buttonRegister}>Crear cuenta</Button>
             </div>
             {isAlertModal ? (
                 <div className={styles.alertModal}>

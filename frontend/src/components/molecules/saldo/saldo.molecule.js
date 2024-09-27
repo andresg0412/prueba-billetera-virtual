@@ -6,8 +6,8 @@ function Saldo({ balance }) {
     return (
         <>
             <div className={styles.container}>
-                <Titulo3>SALDO</Titulo3>
-                <Balance>{balance}</Balance>
+                <Titulo3 className={styles.title}>SALDO</Titulo3>
+                <Balance className={styles.balance}>$ {balance}</Balance>
             </div>
         </>
     )

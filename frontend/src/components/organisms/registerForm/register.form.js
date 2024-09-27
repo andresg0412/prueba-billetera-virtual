@@ -14,7 +14,7 @@ function RegisterForm({
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const handleClick = () => {
-        //handleSubmit(name, document, phone, email);
+        handleSubmit(name, document, phone, email);
     }
     const handleButtonGoToLogin = () => {
         handleGoToLogin();
@@ -58,7 +58,7 @@ function RegisterForm({
                 />
                 <Button onClick={handleClick}>Crear cuenta</Button>
                 {error && <p className="text-red-500">{error}</p>}
-                <Button onClick={handleButtonGoToLogin}>Ingresar</Button>
+                <Button onClick={handleButtonGoToLogin} className={styles.buttonIngresar}>Ingresar</Button>
             </div>
 
         </>

@@ -1,27 +1,55 @@
 import { signToken } from '@/utils/auth';
 import { NextResponse } from 'next/server';
 import { serialize } from 'cookie';
+import axios from 'axios';
+import { configDotenv } from 'dotenv';
+
+configDotenv();
 
 export async function POST(req) {
-
     const { document, phone } = await req.json();
-
-    if (document === '123456' && phone === '3151234567') {
-        const token = signToken({ document: document, phone: phone });
-
-        const cookie = serialize('auth', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== 'development',
-            maxAge: 3600,
-            sameSite: 'strict',
-            path: '/',
-        });
-
-        const response = NextResponse.json({ success: true });
-        response.headers.set('Set-Cookie', cookie);
-        return response;
+    if (!document || !phone) {
+        return NextResponse.json({ success: false, message: 'Document and phone are required' });
     }
 
-    return NextResponse.json({ success: false });
+    try {
+        const response = await axios.get(`${process.env.BASE_URL_API}/api/customers`);
 
+        const { success, data } = response.data;
+
+        if (!success || !data) {
+            return NextResponse.json({ success: false, message: 'Error en API' });
+        }
+
+        const customer = data.find((item) => item.document === document && item.phone === phone);
+
+        if (customer) {
+            const documentCookie = serialize('document', document, {
+                httpOnly: false,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7,
+                path: '/',
+            });
+            const phoneCookie = serialize('phone', phone, {
+                httpOnly: false,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7,
+                path: '/',
+            });
+            const response = NextResponse.json({
+                success: true,
+                message: 'Login successful',
+                customer,
+            });
+            response.headers.append('Set-Cookie', documentCookie);
+            response.headers.append('Set-Cookie', phoneCookie);
+            return response;
+        } else {
+            return NextResponse.json({ success: false, message: 'Customer not found' });
+        }
+    }
+
+    catch (error) {
+        return NextResponse.json({ success: false, message: 'Error en API' });
+    }
 }

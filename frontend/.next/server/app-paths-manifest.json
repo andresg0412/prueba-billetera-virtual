@@ -1,7 +1,9 @@
 {
+  "/login/page": "app/login/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/marketplace/page": "app/marketplace/page.js",
-  "/login/page": "app/login/page.js",
-  "/page": "app/page.js",
-  "/api/products/route": "app/api/products/route.js"
+  "/api/confirmpay/route": "app/api/confirmpay/route.js",
+  "/api/products/route": "app/api/products/route.js",
+  "/api/payment/route": "app/api/payment/route.js",
+  "/api/balance/route": "app/api/balance/route.js"
 }

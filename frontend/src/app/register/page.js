@@ -9,14 +9,25 @@ export default function Login() {
     const [error, setError] = useState('');
     const router = useRouter();
 
-    const handleSubmit = async () => {
-        console.log('ok')
+    const handleSubmit = async (name, document, phone, email) => {
+        try {
+            const response = await axios.post('/api/register', {
+                name,
+                document,
+                phone,
+                email
+            });
+            if (response.data.success === true) {
+                router.push('/login');
+            }
+        } catch (error) {
+            setError(error.response.data.message);
+        }
     };
 
     const handleGoToLogin = () => {
         router.push('/login');
     };
-
 
     return (
         <>

@@ -5,6 +5,7 @@ import Button from '@/components/atoms/button/button.component';
 import PayModal from '@/components/organisms/payModal/pay.modal.organism';
 import OtpModal from '@/components/organisms/otpModal/otp.modal';
 import AlertModal from '@/components/organisms/alertModal/alert.modal';
+import axios from 'axios';
 import styles from './marketplace.module.css';
 import { useRouter } from 'next/navigation';
 function MarketplaceTemplate({ products }) {
@@ -19,28 +20,37 @@ function MarketplaceTemplate({ products }) {
         setProductSelected(product)
         setIsPayModalVisible(true);
     }
-    function handleAceptPay() {
-        setIsPayModalVisible(false);
-        setIsOTPModalVisible(true);
+    async function handleAceptPay() {
+        const response = await axios.post('/api/payment', { cost_to_pay: productSelected.price });
+        console.log(response.data);
+        if (response.data.success === true) {
+            setIsPayModalVisible(false);
+            setIsOTPModalVisible(true);
+        }
     }
-    function handleConfirmOtp() {
-        setIsOTPModalVisible(false);
-        setResultOp('Comprado con éxito');
-        setIsAlertModal(true);
+    async function handleConfirmOtp(valueOtp) {
+        const response = await axios.post('/api/confirmpay', { token: valueOtp });
+        if (response.data.success === true) {
+            setIsOTPModalVisible(false);
+            setResultOp('Comprado con éxito');
+            setIsAlertModal(true);
+        }
     }
     return (
         <>
-            <div>
-                <Titulo3>Marketplace</Titulo3>
-            </div>
-            <div>
-                <ListProducts
-                    products={products}
-                    handleSelectedProduct={handleSelectedProduct}
-                />
-            </div>
-            <div>
-                <Button onClick={() => router.back()}>Volver</Button>
+            <div className={styles.containerMarketplace}>
+                <div>
+                    <Titulo3>Marketplace</Titulo3>
+                </div>
+                <div>
+                    <ListProducts
+                        products={products}
+                        handleSelectedProduct={handleSelectedProduct}
+                    />
+                </div>
+                <div>
+                    <Button onClick={() => router.back()}>Volver</Button>
+                </div>
             </div>
             {isPayModalVisible ? (
                 <div className={styles.containerModal}>
