@@ -14,7 +14,6 @@ export async function POST(req) {
 
     try {
         const response = await axios.get(`${process.env.BASE_URL_API}/api/customers`);
-
         const { success, data } = response.data;
 
         if (!success || !data) {
@@ -36,6 +35,12 @@ export async function POST(req) {
                 maxAge: 60 * 60 * 24 * 7,
                 path: '/',
             });
+            const nameCookie = serialize('name', customer.name, {
+                httpOnly: false,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7,
+                path: '/',
+            });
             const response = NextResponse.json({
                 success: true,
                 message: 'Login successful',
@@ -43,6 +48,7 @@ export async function POST(req) {
             });
             response.headers.append('Set-Cookie', documentCookie);
             response.headers.append('Set-Cookie', phoneCookie);
+            response.headers.append('Set-Cookie', nameCookie);
             return response;
         } else {
             return NextResponse.json({ success: false, message: 'Customer not found' });
@@ -50,6 +56,6 @@ export async function POST(req) {
     }
 
     catch (error) {
-        return NextResponse.json({ success: false, message: 'Error en API' });
+        return NextResponse.json({ success: false, message: error });
     }
 }

@@ -13,5 +13,5 @@ EXPOSE 5001
 EXPOSE 5002
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["bash", "-c", "node sync.js && npm start"]
 

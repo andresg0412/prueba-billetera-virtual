@@ -10,16 +10,15 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 export default function Dashboard() {
-    const [name, setName] = useState('Andres');
-    const [balance, setBalance] = useState(1000);
+    const [name, setName] = useState('');
+    const [balance, setBalance] = useState(0);
 
     const document = Cookies.get('document');
     const phone = Cookies.get('phone');
 
-    //OBTENER NOMBRE DEL CLIENTE
-
-    //OBTENER BALANCE DEL CLIENTE
     useEffect(() => {
+        const nameCookie = Cookies.get('name');
+        setName(nameCookie);
         const getBalance = async () => {
             const response = await axios.get(`/api/balance`);
             setBalance(response.data.balance);
