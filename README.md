@@ -129,12 +129,17 @@ Este proyecto es una aplicación web simulando una billetera virtual. El backend
 
 # Base de datos
 
+![image](https://github.com/user-attachments/assets/74fbaf6e-51eb-474e-a30e-20106209ae08)
+
+
 
 
 # Colección Postman
 
 Puedes importarlo en Postman o Insomnia para hacer llamados a la API.
+[coleccion-API-Billetera-Virtual.zip](https://github.com/user-attachments/files/17168111/coleccion-API-Billetera-Virtual.zip)
 
+O también esta disponible la documentación Swagger en http://localhost:5002/api-docs
 
 
 # Video de Explicación
