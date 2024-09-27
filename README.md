@@ -143,3 +143,13 @@ O también esta disponible la documentación Swagger en http://localhost:5002/ap
 
 
 # Video de Explicación
+
+https://drive.google.com/drive/folders/1s-P90R-Eg93MJZ5jpjwMXEe9lGhP_J6d?usp=drive_link
+
+
+![Captura de pantalla 2024-09-27 152628](https://github.com/user-attachments/assets/eae6057a-ea1a-4f0a-a940-32b92e641062)
+
+![Captura de pantalla 2024-09-27 152706](https://github.com/user-attachments/assets/48dcc21e-8588-4b32-abe5-e74ddc90ba7d)
+
+
+
