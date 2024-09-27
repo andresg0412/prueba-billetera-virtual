@@ -1,0 +1,554 @@
+openapi: 3.0.0
+info:
+  title: API de Billetera Virtual
+  description: API para servir la billetera virtual
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:5002/api'
+    description: Servidor local
+paths:
+  /customers:
+    get:
+      summary: Obtener todos los clientes
+      description: Retorna una lista de todos los clientes registrados
+      responses:
+        200:
+          description: Retorna una lista de todos los clientes registrados
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      description: Status de la transacción
+                    success:
+                      type: boolean
+                      description: Resultado de la translahoma
+                    message:
+                      type: string
+                      description: Descripción de la transacción
+                    data:
+                      type: object
+                      description: Contenido de la transacción
+                    error:
+                      type: string
+                      description: Descripción del error
+        500:
+          description: No se han podido obtener los clientes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /customer/{id}:
+    get:
+      summary: Obtener un cliente por su identificador
+      description: Retorna un cliente por su identificador
+      parameters:
+        - name: id
+          in: path
+          description: Identificador del cliente
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Retorna un cliente por su identificador
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        404:
+          description: No se ha podido encontrar el cliente con el identificador indicado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        500:
+          description: No se han podido obtener los clientes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /balance/{document}/{phone}:
+    get:
+      summary: Obtener el saldo de un cliente
+      description: Retorna el saldo de un cliente
+      parameters:
+        - name: document
+          in: path
+          description: Documento del cliente
+          required: true
+          schema:
+            type: string
+        - name: phone
+          in: path
+          description: Telefono del cliente
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Retorna el saldo de un cliente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        404:
+          description: No se ha podido encontrar el cliente con el identificador indicado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        500:
+          description: No se han podido obtener los clientes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /customer:
+    post:
+      summary: Crear un nuevo cliente
+      description: Crea un nuevo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nombre del cliente
+                document:
+                  type: string
+                  description: Documento del cliente
+                phone:
+                  type: string
+                  description: Telefono del cliente
+                email:
+                  type: string
+                  description: Email del cliente
+      responses:
+        200:
+          description: Crea un nuevo cliente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        400:
+          description: No se ha podido crear el cliente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        500:
+          description: No se han podido crear los clientes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /deposit:
+    post:
+      summary: Depositar a un cliente
+      description: Deposita a un cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: string
+                  description: Documento del cliente
+                phone:
+                  type: string
+                  description: Telefono del cliente
+                amount:
+                  type: number
+                  description: Cantidad a depositar
+      responses:
+        201:
+          description: Cargar dinero a la wallet de un cliente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        400:
+          description: No se ha podido cargar el dinero
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        500:
+          description: No se han podido cargar el dinero
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /payment:
+    post:
+      summary: Pagar una compra
+      description: Paga una compra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: string
+                  description: Documento del cliente
+                phone:
+                  type: string
+                  description: Telefono del cliente
+                cost_to_pay:
+                  type: number
+                  description: Cantidad a pagar
+      responses:
+        201:
+          description: Crea una nueva transacción
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        400:
+          description: No se ha podido crear la transacción
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+  /confirmPayment:
+    post:
+      summary: Confirma una transacción
+      description: Confirma una transacción
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: string
+                  description: Documento del cliente
+                phone:
+                  type: string
+                  description: Telefono del cliente
+                token:
+                  type: string
+                  description: Token de la transacción
+                sessionId:
+                  type: string
+                  description: SessionId de la transacción
+      responses:
+        201:
+          description: Confirmar transacción
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        400:
+          description: No se ha podido crear la transacción
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
+        500:
+          description: No se han podido crear la transacción
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: Status de la transacción
+                  success:
+                    type: boolean
+                    description: Resultado de la translahoma
+                  message:
+                    type: string
+                    description: Descripción de la transacción
+                  data:
+                    type: object
+                    description: Contenido de la transacción
+                  error:
+                    type: string
+                    description: Descripción del error
